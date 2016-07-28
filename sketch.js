@@ -1,5 +1,13 @@
 //make a variable to catch the JSON object
 var dataz;
+var happymagpie;
+var sadmagpie;
+
+
+
+
+
+
 
 //this is what pings their API and uses a javascript thing called socket.io
 //basically imagine it as opening up the star gate and the data comes through
@@ -24,6 +32,8 @@ var s= 1;
 
 function preload()
 {
+  happymagpie = loadImage("data/happymagpie.png");
+  sadmagpie = loadImage("data/sadmagpie.png");
   // initialize sound
   soundHawk = loadSound('data/preybird.mp3');
   soundMagpie = loadSound('data/magpie.mp3');
@@ -33,11 +43,13 @@ function preload()
 
 function setup() {
 	createCanvas(640, 480);
-	background(0,0,0);
+	background(255,255,255);
 	println(dataz);
 }
 
 function draw() {
+  background(255,255,255);
+  
 
 	noStroke();
 	if(dataz!=null){
@@ -54,17 +66,18 @@ function draw() {
 	
 	
 
-	from = color(255, 0, 0);
-	to = color(0, 255, 0);
-	var x = map(100,0,2500, 0,1);
-	var col1 = lerpColor(from, to, x); //http://p5js.org/reference/#/p5/lerpColor
-	fill(col1);
-	rect(0,0,width,height/2);
-	fill(0);
-	rect(0,height/2,width,height/2);
+// 	from = color(255, 0, 0);
+// 	to = color(0, 255, 0);
+// 	var x = map(100,0,2500, 0,1);
+// 	var col1 = lerpColor(from, to, x); //http://p5js.org/reference/#/p5/lerpColor
+// 	fill(col1);
+// 	rect(0,0,width,height/2);
+// 	fill(0);
+// 	rect(0,height/2,width,height/2);
 
 	if(soundData>66 || no2>500){
 	  		println("bad stuff:"+soundData);
+    image(sadmagpie, 0, 0);
 		if(s==1){
 		  		println("calling hawk:"+soundData);
 			soundHawk.play();
@@ -77,6 +90,7 @@ function draw() {
   //soundHawk.stop();
 	//}
 	else{if(soundData<66 && no2<500){
+	  image(happymagpie, 0, 0);
 	  println("good stuff");
 		if(s==1){
 		  println("magpie");
