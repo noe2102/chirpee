@@ -44,7 +44,7 @@ function draw() {
 //ping API to get sensor value
     //println("dataz: " + JSON.stringify(dataz.data.data.sensors[7]));
 		soundData = Math.round(dataz.data.data.sensors[7].prev_value);
-		// println("sound (dB):"+soundData);
+		println("sound (dB):"+soundData);
 
 		no2 = dataz.data.data.sensors[4].raw_value;
     //co = dataz.data.data.sensors[4].raw_value;
@@ -64,9 +64,7 @@ function draw() {
 	rect(0,height/2,width,height/2);
 
 	if(soundData>66 || no2>500){
-	  		println("bad stuff:"+soundData);
 		if(s==1){
-		  		println("calling hawk:"+soundData);
 			soundHawk.play();
 			s=0;
 			console.log("Where's my hawk?");
@@ -76,10 +74,8 @@ function draw() {
 	//else{
   //soundHawk.stop();
 	//}
-	else{if(soundData<66 && no2<500){
-	  println("good stuff");
+	else{if(soundData<50 && no2<500){
 		if(s==1){
-		  println("magpie");
 			soundMagpie.play();
 			s=0;
 			console.log("Where's my magpie?");
@@ -98,8 +94,7 @@ function draw() {
 
 }
 function myCallback () {
-  console.log("sound finished")
-// 	console.info("sound finished");
+	console.info("sound finished");
 	s=1;
 }
 
